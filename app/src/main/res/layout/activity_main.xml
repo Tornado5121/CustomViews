@@ -7,8 +7,8 @@
     tools:context=".MainActivity">
 
     <com.natife.example.customviews.MyCustomView
-        android:layout_width="160dp"
-        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:borderColor="#D50A0A"
         app:borderWidth="10dp"
         app:cornerRadius="16dp" />

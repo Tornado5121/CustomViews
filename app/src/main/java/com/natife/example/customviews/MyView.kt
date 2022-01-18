@@ -79,8 +79,6 @@ class MyCustomView @JvmOverloads constructor(
             }
         }
 
-        setMeasuredDimension(widthView, heightView)
-
         rect.set(
             borderWidth / 2,
             borderWidth / 2,

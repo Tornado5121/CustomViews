@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Paint.Style
-import android.graphics.Rect
 import android.graphics.RectF
 import android.os.Build
 import android.util.AttributeSet
@@ -45,7 +44,7 @@ class MyCustomView @JvmOverloads constructor(
         rectView.isAntiAlias = true
         rectView.color = borderColor
         rectView.strokeWidth = borderWidth
-        rect.set(10F, 10F, width - 10F, height - 10F)
+        rect.set(borderWidth/2, borderWidth/2, width - borderWidth/2, height - borderWidth/2)
         canvas?.drawRoundRect(rect,cornerRadius,cornerRadius, rectView)
     }
 

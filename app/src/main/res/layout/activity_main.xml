@@ -10,8 +10,6 @@
         android:layout_width="160dp"
         android:layout_height="80dp"
         app:borderColor="#D50A0A"
-        app:borderWidth="5dp"
-        app:cornerRadius="0dp" />
-
-
+        app:borderWidth="30dp"
+        app:cornerRadius="16dp" />
 </FrameLayout>

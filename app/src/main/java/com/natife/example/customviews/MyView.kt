@@ -5,19 +5,20 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Paint.Style
 import android.graphics.RectF
-import android.os.Build
 import android.util.AttributeSet
 import android.view.View
-import androidx.annotation.RequiresApi
+import android.view.View.MeasureSpec.AT_MOST
+import android.view.View.MeasureSpec.EXACTLY
+import kotlin.math.min
 
 class MyCustomView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null, defaultStyle: Int = 0
 ) : View(context, attrs, defaultStyle) {
 
-    private var cornerRadius: Float
-    private var borderWidth: Float
-    private var borderColor: Int
+    private val cornerRadius: Float
+    private val borderWidth: Float
+    private val borderColor: Int
     private val rectView = Paint()
     private val rect = RectF()
 
@@ -27,7 +28,6 @@ class MyCustomView @JvmOverloads constructor(
             R.styleable.MyCustomView,
             0, 0
         ).apply {
-
             try {
                 cornerRadius = getDimension(R.styleable.MyCustomView_cornerRadius, 0F)
                 borderWidth = getDimension(R.styleable.MyCustomView_borderWidth, 0F)
@@ -36,16 +36,56 @@ class MyCustomView @JvmOverloads constructor(
                 recycle()
             }
         }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    override fun onDraw(canvas: Canvas?) {
         rectView.style = Style.STROKE
         rectView.isAntiAlias = true
         rectView.color = borderColor
         rectView.strokeWidth = borderWidth
-        rect.set(borderWidth/2, borderWidth/2, width - borderWidth/2, height - borderWidth/2)
-        canvas?.drawRoundRect(rect,cornerRadius,cornerRadius, rectView)
     }
 
+    override fun onDraw(canvas: Canvas?) {
+
+        canvas?.drawRoundRect(rect, cornerRadius, cornerRadius, rectView)
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
+        val widthSize = MeasureSpec.getSize(widthMeasureSpec)
+        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
+        val heightSize = MeasureSpec.getSize(heightMeasureSpec)
+
+        val widthView: Int = when (widthMode) {
+            EXACTLY -> {
+                widthSize
+            }
+            AT_MOST -> {
+                min(width, widthSize)
+            }
+            else -> {
+                width
+            }
+        }
+
+        val heightView: Int = when (heightMode) {
+            EXACTLY -> {
+                heightSize
+            }
+            AT_MOST -> {
+                min(height, heightSize)
+            }
+            else -> {
+                height
+            }
+        }
+
+        setMeasuredDimension(widthView, heightView)
+
+        rect.set(
+            borderWidth / 2,
+            borderWidth / 2,
+            widthView - borderWidth / 2,
+            heightView - borderWidth / 2
+        )
+    }
 }

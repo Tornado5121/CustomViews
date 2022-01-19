@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/custom_layout"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <com.natife.example.customviews.MyCustomView
@@ -13,6 +13,15 @@
         android:layout_height="80dp"
         app:borderColor="#D50A0A"
         app:borderWidth="10dp"
-        app:cornerRadius="16dp"/>
+        app:cornerRadius="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:padding="4dp"
+        android:text="@string/item_example"
+        android:background="@color/black"
+        android:textColor="@color/white"/>
 
 </com.natife.example.customviews.CustomLinearLayout>

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CustomViews</string>
+    <string name="item_example">item_example</string>
 </resources>
